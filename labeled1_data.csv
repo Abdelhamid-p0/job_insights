@@ -1,0 +1,58 @@
+Sector,Skill,DemandLabel
+Data Science,méthodique,Normally Demanded
+Data Science,rigoureux,Normally Demanded
+Data Science,Curieux,Normally Demanded
+Data Science,Data Science,Highly Demanded
+Data Science,Analytique,Normally Demanded
+Ressources Humaines,Ressources Humaines,Normally Demanded
+Ressources Humaines,Diplomate,Normally Demanded
+Ressources Humaines,stratégique,Normally Demanded
+Web,autonome,Normally Demanded
+Web,Web Development,Normally Demanded
+Web,Organisé,Normally Demanded
+Finance,Rationnel,Normally Demanded
+Finance,Finance,Normally Demanded
+Finance,rigoureux,Normally Demanded
+Consulting,ERP,Normally Demanded
+Consulting,Consulting,Normally Demanded
+Consulting,rigoureux,Normally Demanded
+Consulting,stratégique,Normally Demanded
+Consulting,Analytique,Normally Demanded
+Consulting,Organisé,Normally Demanded
+IT,Product Management,Normally Demanded
+IT,Innovant,Normally Demanded
+IT,communicant,Normally Demanded
+IT,IT Management,Normally Demanded
+IT,orienté solution,Normally Demanded
+IT,DevOps,Normally Demanded
+IT,Réseaux,Normally Demanded
+IT,Logique,Normally Demanded
+IT,Cloud,Normally Demanded
+IT,Rigoureux,Normally Demanded
+IT,créatif,Normally Demanded
+IT,dynamique,Normally Demanded
+IT,Analytique,Normally Demanded
+IT,Créatif,Normally Demanded
+IT,méthodique,Normally Demanded
+IT,Dynamique,Highly Demanded
+IT,organisé,Normally Demanded
+IT,Technologie,Normally Demanded
+IT,Web Development,Normally Demanded
+IT,stratégique,Normally Demanded
+IT,vision stratégique,Normally Demanded
+IT,Software Development,Normally Demanded
+IT,Leadership,Normally Demanded
+Mobile,réactif,Normally Demanded
+Mobile,Autonome,Normally Demanded
+Mobile,Mobile Development,Normally Demanded
+Communication,Communication,Normally Demanded
+Communication,dynamique,Normally Demanded
+Communication,Créatif,Normally Demanded
+Marketing,SEO,Normally Demanded
+Marketing,méthodique,Normally Demanded
+Marketing,communicant,Normally Demanded
+Marketing,Analytiques,Normally Demanded
+Marketing,Marketing,Normally Demanded
+Marketing,Marketing Digital,Normally Demanded
+Marketing,stratégique,Normally Demanded
+Marketing,Créatif,Highly Demanded

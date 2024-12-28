@@ -1,5 +1,6 @@
 package Front;
 
+
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -9,25 +10,60 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import rmi_api.Annonce;
+import rmi_api.ResponseRMI;
+import rmi_api.ServicesAPI;
 
-import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.List;
 
 public class GUI extends Application {
 
     private boolean isGraphVisible = false; // To manage the visibility of statistics
-    private messenger server; // Reference to the server
+    private List<Annonce> listeAnnoces; // Reference to the server
+    ServicesAPI service;
+    ResponseRMI response;
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Connect to the server
-            server = (messenger) Naming.lookup("//localhost:1110/Test");
+            // Connexion au registre RMI
+            Registry registry = LocateRegistry.getRegistry("localhost", 5002);
+            System.out.println("Client Connected with back en 5002");
+
+            // Recherche du service distant
+            service = (ServicesAPI) registry.lookup("ServiceAPI");
+
+            System.out.println("Request to getAllAnnonces");
+
+            // Appel du service distant
+            ResponseRMI response = service.getAllAnnonces();
+
+            System.out.println("Response to getAllAnnonces: " + response);
+
+
+            if (response != null && response.body != null && response.body.annonceList != null) {
+                // Traitement de la réponse
+                listeAnnoces = response.body.annonceList;
+                System.out.println("Response status code: " + response.statuscode);
+                System.out.println("Total annonces: " + listeAnnoces.size());  // Vérifier la taille des annonces
+            } else {
+                System.err.println("La réponse est vide ou incorrecte.");
+            }
+        } catch (RemoteException e) {
+            showError("Remote exception: " + e.getMessage());
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            showError("Service not found in the registry: " + e.getMessage());
+            e.printStackTrace();
         } catch (Exception e) {
-            showError("Error connecting to the server: " + e.getMessage());
-            return;
+            showError("General error connecting to the server: " + e.getMessage());
+            e.printStackTrace();
         }
+
 
         // Text area for displaying chat messages
         TextArea chatArea = new TextArea();
@@ -85,16 +121,7 @@ public class GUI extends Application {
         // Action for the send button
         sendButton.setOnAction(event -> {
             String userMessage = userInput.getText();
-            if (!userMessage.isEmpty()) {
-                chatArea.appendText("Utilisateur: " + userMessage + "\n");
-                try {
-                    String response = server.sendInput(userMessage);
-                    chatArea.appendText("Chatbot: " + response + "\n");
-                } catch (RemoteException e) {
-                    chatArea.appendText("Chatbot: Error communicating with the server.\n");
-                }
-                userInput.clear();
-            }
+
         });
 
         // Scene configuration
@@ -102,6 +129,14 @@ public class GUI extends Application {
         primaryStage.setTitle("Calculatrice Chatbot");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void chatbootQuerry() throws RemoteException {
+
+        //read lkl
+        response = service.processUserQuery("");
+
+
     }
 
     // Method to show the announcements page
@@ -124,19 +159,15 @@ public class GUI extends Application {
         // ListView for displaying announcements
         ListView<String> annoncesList = new ListView<>();
 
+        for (Annonce annonce : listeAnnoces) {
+            annoncesList.getItems().add(annonce.toString());
+        }
+
         filterButton.setOnAction(event -> {
             String selectedVille = villeFilter.getValue();
             String selectedFonction = fonctionFilter.getValue();
 
-            try {
-                ArrayList<Annonce> annonces = server.filter(selectedFonction, selectedVille);
-                annoncesList.getItems().clear();
-                for (Annonce annonce : annonces) {
-                    annoncesList.getItems().add(annonce.toString1());
-                }
-            } catch (RemoteException e) {
-                showError("Error filtering announcements: " + e.getMessage());
-            }
+
         });
 
         HBox filterLayout = new HBox(10, villeFilter, fonctionFilter, filterButton);
@@ -170,6 +201,8 @@ public class GUI extends Application {
     }
 
     public static void main(String[] args) {
+
+
         launch(args);
     }
 }

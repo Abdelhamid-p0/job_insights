@@ -1,6 +1,7 @@
 package Front;
 
-import Front.Annonce;
+import rmi_api.Annonce;
+
 import java.util.ArrayList;
 import java.rmi.*;
 public interface messenger extends Remote {

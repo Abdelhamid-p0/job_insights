@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Front.iml" filepath="$PROJECT_DIR$/Front.iml" />
+      <module fileurl="file://$USER_HOME$/eclipse-workspace/job_insights_api/src/rmi_api/rmi_api.iml" filepath="$USER_HOME$/eclipse-workspace/job_insights_api/src/rmi_api/rmi_api.iml" />
     </modules>
   </component>
 </project>

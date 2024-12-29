@@ -9,7 +9,7 @@ import java.util.*;
 
 public class extractfile {
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/scrapping"; // Replace with your database URL
+        String url = "jdbc:mysql://localhost:3307/javaproject"; // Replace with your database URL
         String username = "root"; // Replace with your MySQL username
         String password = ""; // Replace with your MySQL password
         String tableName = "annonce"; // Replace with the table name

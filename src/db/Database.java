@@ -265,6 +265,7 @@ public class Database {
 						resultSet.getString(28),
 						resultSet.getString(29));
 				a.add(test);
+				System.out.println("I entered here");
 			}
 		}
 		catch(Exception e) {
@@ -326,6 +327,7 @@ public class Database {
 				Pair<String,Integer> element = Pair.of(token,0);
 				pairTable.add(element);
 			}
+			System.out.println("I entered here 2");
 		}
 		catch(Exception e) {
 			System.out.println("Selection error 2 failed");

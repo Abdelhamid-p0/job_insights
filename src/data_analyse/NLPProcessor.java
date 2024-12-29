@@ -214,7 +214,7 @@ public class NLPProcessor {
 			chart = backend.Chart(table.get(0).getRight() , table.get(1).getRight());
 			int pourcentage = 0 ;
 			for(Pair<String , Integer> item : chart){
-				if(item.getLeft() == table.get(0).getLeft()){
+				if(item.getLeft().contains(table.get(1).getRight())){
 					pourcentage = item.getRight();
 				}
 			}

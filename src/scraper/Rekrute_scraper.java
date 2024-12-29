@@ -28,7 +28,10 @@ public class Rekrute_scraper {
 		            Document document = Jsoup.connect(url).get();
 		            
 		            Elements jobItems = document.select("ul.job-list.job-list2#post-data > li");
-		            for (Element item : jobItems) {     
+		            for (Element item : jobItems) {    
+		            	//traitement de la page initiale 
+		            	
+		            	
 		                String jobTitleAndLocation [] = item.select("h2 a.titreJob").text().split("\\|");  
 		                String jobTitle = jobTitleAndLocation[0];
 		                String jobLocation = jobTitleAndLocation[1];
@@ -67,14 +70,18 @@ public class Rekrute_scraper {
 		                String phase3 [] = Info.get(2).text().split(":");
 		                String phase4 [] = Info.get(3).text().split(":");
 		                String phase5 [] = Info.get(4).text().split(":");    
-		                String Secteur = phase1 [1];
-		                String Fonction = phase2 [1];
+		                String Secteur = phase1 [1].replace("  ", "/").replace("-", "/");
+		                String Fonction = phase2 [1].replace("  ", "/").replace("-", "/").replace(",", "/");
 		                String Experience = phase3 [1];
-		                String NiveauEtude = phase4 [1];
+		                String NiveauEtude = phase4 [1].replace(" ", "").toUpperCase();
 		                String Contract = phase5 [1];
-		                //listeAnnonce.add(new Annonce(i,jobTitle,jobLocation,jobDescription,jobDateS,jobDateE,jobN,Secteur,Fonction,Experience
-		                		//,NiveauEtude,Contract));
+		                String urlSite = item.select("div div a.href").text();
+		                String urlScrap = item.select("div div div a.href").text();
 		                i++;
+		                System.out.println(jobTitle+" "+jobDescription+" "+jobDateS+" "+jobDateE+" "+jobN+" "+Secteur+" "+Fonction+" "+Experience+" "+NiveauEtude+" "+ContratDetails+" "+urlSite+" "+Teletravaille+" ");
+		            }
+		            if(j==26) {
+		            	System.out.println(i);
 		            }
 		        }catch (Exception e) {
 		            e.printStackTrace();
@@ -86,68 +93,11 @@ public class Rekrute_scraper {
 			return listeAnnonce;
 		}
 
-		public void ScraperEmploiMa() {
-			try {
-	        	String url = "https://www.emploi.ma/recherche-jobs-maroc?page=1";
-	        	Document doc =  Jsoup.connect(url).get();
-	        	Elements jobOffers = doc.select("main#main-content div.page-content div div.page-main div.page-search-jobs div.page-search-jobs-wrapper div.page-search-jobs-content > div");
-	        	for(Element item : jobOffers) {
-	        		String title = item.select("div h3 a").text();
-	        		String Description = item.select("div div p").text();
-	        		Elements details = item.select("div ul li strong");
-	        		String NiveauEtude ;
-	        		String Experience ;
-	        		String Contrat ;
-	        		String Location1 ;
-	        		String Location = "";
-	        		String Fonction ;
-	        		if(details.size() == 5) {
-	        			NiveauEtude = details.get(0).text();
-	            		Experience = details.get(1).text();
-	            		Contrat = details.get(2).text();
-	            		Location1 = details.get(3).text();
-	            		String moroccanCitiesRegex = "\\b(Casablanca|Rabat|Fès|Fez|Marrakech|Meknès|Meknes|Tétouan|Tetouan|Tanger|Tangier|Agadir|Oujda|Kénitra|Kenitra|Safi|El Jadida|Beni Mellal|Nador|Taza|Mohammedia|Khouribga|Settat|Larache|Ksar El Kebir|Essaouira|Al Hoceima|Inezgane|Taroudant|Berkane|Sidi Slimane|Sidi Kacem|Errachidia|Ouarzazate|Guelmim|Tan-Tan|Laâyoune|Laayoune|Dakhla|Chefchaouen|Midelt|Azrou|Ifrane|Tiznit|Zagora|Youssoufia|Sefrou|Boujdour|Maroc)\\b";
-	                    Pattern pattern = Pattern.compile(moroccanCitiesRegex, Pattern.CASE_INSENSITIVE);
-	                    Matcher matcher = pattern.matcher(Location1+title);
-	                    while (matcher.find()) {
-	                    	Location = Location + matcher.group();
-	                        break;
-	                    }
-	            		Fonction = details.get(4).text();
-	        		}
-	        		else {
-	        			NiveauEtude = details.get(0).text();
-	            		Experience = details.get(1).text();
-	            		Contrat = details.get(2).text();
-	            		Location1 = details.get(3).text();
-	            		String moroccanCitiesRegex = "\\b(Casablanca|Rabat|Fès|Fez|Marrakech|Meknès|Meknes|Tétouan|Tetouan|Tanger|Tangier|Agadir|Oujda|Kénitra|Kenitra|Safi|El Jadida|Beni Mellal|Nador|Taza|Mohammedia|Khouribga|Settat|Larache|Ksar El Kebir|Essaouira|Al Hoceima|Inezgane|Taroudant|Berkane|Sidi Slimane|Sidi Kacem|Errachidia|Ouarzazate|Guelmim|Tan-Tan|Laâyoune|Laayoune|Dakhla|Chefchaouen|Midelt|Azrou|Ifrane|Tiznit|Zagora|Youssoufia|Sefrou|Boujdour)\\b";
-	                    Pattern pattern = Pattern.compile(moroccanCitiesRegex, Pattern.CASE_INSENSITIVE);
-	                    Matcher matcher = pattern.matcher(Location1+title);
-	                    while (matcher.find()) {
-	                    	Location = Location + matcher.group();
-	                        break;
-	                    }
-	            		Fonction = "not defined";
-	        		}
-	        		
-	        		String dateS = item.select("div time").text();
-	        		String dateE = "30/12/2024";
-	        		int dateN = 0;
-	        		String Secteur = Fonction;	
-	        		//listeAnnonce.add(new Annonce(i,title,Location,Description,dateS,dateE,dateN,Secteur,Fonction,Experience
-	                		//,NiveauEtude,Contrat));
-	                i++;
-	        	}
-			}
-			catch(IOException e) {
-				System.out.println(e);
-			}
-		}
-		
 		public void afficheAnnonce() {
 	        for (Annonce item : listeAnnonce) {
 	        	System.out.println("---------------------------------------Offre d emploi-------------------------------");
 	        	System.out.println("Job Title: " + item.getTitle());
+	        	System.out.println("Job Location: " + item.getCity());
 	        	System.out.println("Job Description: " + item.getDescription());
 	        	System.out.println("Job Offer starts : " +item.getStartDate() + " Ends in : " + item.getEndDate());
 	        	System.out.println("le nombre de postes : " + item.getPostsNum());

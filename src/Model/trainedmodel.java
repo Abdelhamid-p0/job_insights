@@ -13,7 +13,7 @@ public class trainedmodel {
         try { 
             // Load CSV data
             CSVLoader loader = new CSVLoader();
-            loader.setSource(new File("C:/Users/ayaes/eclipse-workspace/Model/labeled1_data.csv"));
+            loader.setSource(new File("C:\\Users\\lenovo\\Documents\\S7 dump\\Java\\Ajax Project\\job_insights\\labeled_data.csv"));
             Instances data = loader.getDataSet();
 
             // Debug: Print attribute information to verify the data
@@ -38,7 +38,7 @@ public class trainedmodel {
             System.out.println(eval.toSummaryString("Results:\n", false));
 
             // Serialize the model to a file
-            SerializationHelper.write("C:/Users/ayaes/eclipse-workspace/Model/weka_model1.model", j48classifier);
+            SerializationHelper.write("C:\\Users\\lenovo\\Documents\\S7 dump\\Java\\Ajax Project\\job_insights\\src\\Model\\weka_model1.model", j48classifier);
             
         } catch (Exception e) {
             System.out.println("Error occurred! " + e.getMessage());

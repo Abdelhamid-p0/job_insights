@@ -1,10 +1,15 @@
 package rmi_api;
 
+
+
 import java.io.Serial;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import java.io.Serializable;
+import org.apache.commons.lang3.tuple.Pair;
+
 
 
 public class BodyResponse implements Serializable {
@@ -19,6 +24,6 @@ public class BodyResponse implements Serializable {
 
     public List<Annonce> annonceList;
 
-    public HashMap<String, String> Statistics = new HashMap<>();
+    public ArrayList<Pair<String, Integer>> Statistics = new ArrayList<>();
 
 }

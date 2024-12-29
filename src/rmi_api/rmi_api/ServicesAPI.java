@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public interface ServicesAPI extends Remote {
 
-    ResponseRMI processUserQuery(String userQuery) throws RemoteException;
+    ResponseRMI processUserQuery(String userQuery) throws RemoteException, SQLException;
 
     ResponseRMI getAllAnnonces() throws RemoteException, SQLException;
 

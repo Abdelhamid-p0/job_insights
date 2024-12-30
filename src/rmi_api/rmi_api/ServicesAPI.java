@@ -10,4 +10,5 @@ public interface ServicesAPI extends Remote {
 
     ResponseRMI getAllAnnonces() throws RemoteException, SQLException;
 
+    void submitRating(int i) throws RemoteException;
 }

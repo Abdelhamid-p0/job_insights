@@ -13,6 +13,7 @@ module Front {
 	    requires java.rmi;
     	requires java.sql;
 		requires rmi.api;
+		requires org.apache.commons.lang3;
 
 		exports Front; // Exportez le package contenant la classe GUI pour qu'il soit accessible.
 
